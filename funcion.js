@@ -1,23 +1,21 @@
 
 const productos = [
-  { id: 1, nombre: "Runner Pro",    precio: 1499, categoria: "running",    color: 0 },
-  { id: 2, nombre: "Urban Style",   precio: 1199, categoria: "casual",     color: 1 },
-  { id: 3, nombre: "Court King",    precio: 1899, categoria: "basquetbol", color: 2 },
-  { id: 4, nombre: "Speed Air",     precio: 1699, categoria: "running",    color: 3 },
-  { id: 5, nombre: "Classic White", precio: 999,  categoria: "casual",     color: 4 },
-  { id: 6, nombre: "Jump Max",      precio: 2099, categoria: "basquetbol", color: 1 },
-  { id: 7, nombre: "Trail Runner",  precio: 1799, categoria: "running",    color: 2 },
-  { id: 8, nombre: "Street Low",    precio: 1099, categoria: "casual",     color: 3 }
+  { id: 1, nombre: "Runner Pro",    precio: 1499, categoria: "running",    imagen: "runner_pro.avif" },
+  { id: 2, nombre: "Urban Style",   precio: 1199, categoria: "casual",     imagen: "urban_style.jpg" },
+  { id: 3, nombre: "Court King",    precio: 1899, categoria: "basquetbol", imagen: "court_king.jpg" },
+  { id: 4, nombre: "Speed Air",     precio: 1699, categoria: "running",    imagen: "speed_air.jpg" },
+  { id: 5, nombre: "Classic White", precio: 999,  categoria: "casual",     imagen: "classic_white.jpg" },
+  { id: 6, nombre: "Jump Max",      precio: 2099, categoria: "basquetbol", imagen: "jump_max.jpg" },
+  { id: 7, nombre: "Trail Runner",  precio: 1799, categoria: "running",    imagen: "trail_running.jpg" },
+  { id: 8, nombre: "Street Low",    precio: 1099, categoria: "casual",     imagen: "street_low.jpg" }
 ];
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito")) || [];
 }
-
 function guardarCarrito(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
   actualizarContador();
 }
-
 function actualizarContador() {
   const contador = document.querySelector("#contador-carrito");
   const carrito = obtenerCarrito();
@@ -27,6 +25,7 @@ function actualizarContador() {
   });
   contador.textContent = total;
 }
+
 function agregarAlCarrito(id) {
   const carrito = obtenerCarrito();
   const existente = carrito.find(function (item) { return item.id === id; });
@@ -52,7 +51,7 @@ function crearTarjeta(p) {
     <div class="col-12 col-sm-6 col-lg-3">
       <article class="card producto">
         <div class="foto">
-          <img src="img/tenis.svg" class="card-img-top color-${p.color}" alt="Tenis ${p.nombre}">
+          <img src="${p.imagen}" class="card-img-top" alt="Tenis ${p.nombre}">
         </div>
         <div class="card-body text-center">
           <h3 class="h5">${p.nombre}</h3>
@@ -65,13 +64,11 @@ function crearTarjeta(p) {
       </article>
     </div>`;
 }
-
 function mostrarProductos(lista, contenedor) {
   contenedor.innerHTML = "";
   lista.forEach(function (p) {
     contenedor.innerHTML += crearTarjeta(p);
   });
-
   contenedor.querySelectorAll(".btn-agregar").forEach(function (boton) {
     boton.addEventListener("click", function () {
       agregarAlCarrito(Number(boton.dataset.id));
@@ -97,7 +94,7 @@ if (listaProductos) {
       const coincideCategoria = categoria === "todas" || p.categoria === categoria;
       return coincideNombre && coincideCategoria;
     });
-    
+
     mostrarProductos(filtrados, listaProductos);
     sinResultados.classList.toggle("d-none", filtrados.length > 0);
   }
@@ -113,8 +110,8 @@ if (cuerpoCarrito) {
     let total = 0;
     cuerpoCarrito.innerHTML = "";
 
-    carrito.forEach(function(item) {
-      const p = productos.find(funtion (prod) { return prod.id === item.id; });
+    carrito.forEach(function (item) {
+      const p = productos.find(function (prod) { return prod.id === item.id; });
       const subtotal = p.precio * item.cantidad;
       total += subtotal;
 
@@ -133,11 +130,11 @@ if (cuerpoCarrito) {
     });
 
     document.querySelector("#total-carrito").textContent = "$" + total;
-     const vacio = carrito.length === 0;
+
+    const vacio = carrito.length === 0;
     document.querySelector("#carrito-vacio").classList.toggle("d-none", !vacio);
     document.querySelector("#tabla-carrito").classList.toggle("d-none", vacio);
     document.querySelector("#resumen-carrito").classList.toggle("d-none", vacio);
-
 
     document.querySelectorAll(".btn-mas").forEach(function (b) {
       b.addEventListener("click", function () { cambiarCantidad(Number(b.dataset.id), 1); });
@@ -148,7 +145,7 @@ if (cuerpoCarrito) {
     document.querySelectorAll(".btn-quitar").forEach(function (b) {
       b.addEventListener("click", function () { quitarProducto(Number(b.dataset.id)); });
     });
-  } 
+  }
 
   function cambiarCantidad(id, cambio) {
     const carrito = obtenerCarrito();
@@ -167,3 +164,106 @@ if (cuerpoCarrito) {
     guardarCarrito(carrito);
     mostrarCarrito();
   }
+
+  document.querySelector("#btn-vaciar").addEventListener("click", function () {
+    Swal.fire({
+      title: "¿Vaciar el carrito?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, vaciar",
+      cancelButtonText: "Cancelar"
+    }).then(function (resultado) {
+      if (resultado.isConfirmed) {
+        guardarCarrito([]);
+        mostrarCarrito();
+      }
+    });
+  });
+
+  document.querySelector("#btn-comprar").addEventListener("click", function () {
+    Swal.fire({
+      icon: "success",
+      title: "¡Gracias por tu compra!",
+      text: "Esta es una simulación, no se hizo ningún cobro."
+    });
+    guardarCarrito([]);
+    mostrarCarrito();
+  });
+
+  mostrarCarrito();
+}
+
+const formulario = document.querySelector("#form-contacto");
+if (formulario) {
+  const selectModelo = document.querySelector("#modelo");
+  productos.forEach(function (p) {
+    selectModelo.innerHTML += `<option value="${p.nombre}">${p.nombre} - $${p.precio}</option>`;
+  });
+
+  const mensaje = document.querySelector("#mensaje");
+  mensaje.addEventListener("input", function () {
+    document.querySelector("#contador-letras").textContent = mensaje.value.length;
+  });
+
+  function validarCampo(campo) {
+    if (campo.checkValidity()) {
+      campo.classList.remove("is-invalid");
+      campo.classList.add("is-valid");
+      return true;
+    } else {
+      campo.classList.remove("is-valid");
+      campo.classList.add("is-invalid");
+      return false;
+    }
+  }
+
+  formulario.querySelectorAll("input:not([type=radio]), select, textarea").forEach(function (campo) {
+    campo.addEventListener("input", function () { validarCampo(campo); });
+    campo.addEventListener("change", function () { validarCampo(campo); });
+  });
+
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let todoBien = true;
+
+    formulario.querySelectorAll("input:not([type=radio]), select, textarea").forEach(function (campo) {
+      if (!validarCampo(campo)) {
+        todoBien = false;
+      }
+    });
+
+    const pagoElegido = formulario.querySelector("input[name=pago]:checked");
+    const errorPago = document.querySelector("#error-pago");
+    errorPago.classList.toggle("d-none", pagoElegido !== null);
+    if (!pagoElegido) {
+      todoBien = false;
+    }
+
+    const resultado = document.querySelector("#resultado-form");
+
+    if (!todoBien) {
+      resultado.innerHTML = `<div class="alert alert-danger">Revisa los campos marcados en rojo.</div>`;
+      return;
+    }
+
+    resultado.innerHTML = `
+      <div class="alert alert-success">
+        <h3 class="h5">¡Pedido recibido!</h3>
+        <p class="mb-1"><strong>Nombre:</strong> ${formulario.nombre.value}</p>
+        <p class="mb-1"><strong>Modelo:</strong> ${formulario.modelo.value} (talla ${formulario.talla.value})</p>
+        <p class="mb-0"><strong>Pago:</strong> ${pagoElegido.value}</p>
+      </div>`;
+
+    Swal.fire({
+      icon: "success",
+      title: "¡Enviado!",
+      text: "Te contactaremos pronto, " + formulario.nombre.value
+    });
+
+    formulario.reset();
+    formulario.querySelectorAll(".is-valid").forEach(function (c) { c.classList.remove("is-valid"); });
+    document.querySelector("#contador-letras").textContent = 0;
+  });
+}
+actualizarContador();

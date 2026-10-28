@@ -18,7 +18,7 @@ h1, h2, h3, .logo {
 }
 
 
-.logo { color: var(--naranja) important; }
+.logo { color: var(--naranja) !important; }
 .navbar .nav-link.active { color: var(--naranja); }
 
 
@@ -81,11 +81,6 @@ h1, h2, h3, .logo {
 .producto .precio { font-weight: 800; font-size: 1.25rem; 
 
 }
-.color-0 { filter: none; }
-.color-1 { filter: hue-rotate(200deg); }
-.color-2 { filter: hue-rotate(120deg); }
-.color-3 { filter: hue-rotate(300deg); }
-.color-4 { filter: grayscale(1); }
 
 
 .caja-info {
@@ -103,4 +98,10 @@ h1, h2, h3, .logo {
 
 @media (max-width: 576px) {
   .hero h1 { font-size: 1.9rem; }
+}
+
+.producto .foto img {
+  height: 220px;
+  object-fit: contain;
+  width: 100%;
 }
