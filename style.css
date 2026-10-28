@@ -1,0 +1,30 @@
+:root {
+  --negro: #111827;
+  --naranja: #ff5a1f;
+  --blanco: #ffffff;
+  --gris: #f3f4f6;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--negro);
+  background-color: var(--blanco);
+  padding-top: 70px;
+}
+
+h1, h2, h3, .logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+}
+
+
+.logo { color: var(--naranja) important; }
+.navbar .nav-link.active { color: var(--naranja); }
+
+
+.btn-naranja {
+  background-color: var(--naranja);
+  color: var(--negro);
+  font-weight: 600;
+  border: none;
+}
