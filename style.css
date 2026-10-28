@@ -28,3 +28,36 @@ h1, h2, h3, .logo {
   font-weight: 600;
   border: none;
 }
+
+.btn-naranja:hover {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+.naranja { color: var(--naranja); }
+
+
+.hero {
+  background-color: var(--negro);
+  color: var(--blanco);
+  min-height: 70vh;
+  padding: 40px 0;
+}
+.hero h1 { font-size: 2.5rem; }
+.hero-img { max-height: 280px; }
+
+
+.titulo-seccion {
+  margin-bottom: 1.5rem;
+  border-left: 6px solid var(--naranja);
+  padding-left: 12px;
+}
+.text-center.titulo-seccion { border-left: none; padding-left: 0; }
+.pagina { padding-top: 2rem; min-height: 70vh; }
+
+.beneficio {
+  background-color: var(--gris);
+  border-radius: 12px;
+  padding: 24px;
+  height: 100%;
+}
+.beneficio i { font-size: 2.5rem; color: var(--naranja); margin-bottom: 10px; }
