@@ -113,7 +113,7 @@ if (cuerpoCarrito) {
     let total = 0;
     cuerpoCarrito.innerHTML = "";
 
-    carrito.forEach(function (item) {
+    carrito.forEach(function(item) {
       const p = productos.find(funtion (prod) { return prod.id === item.id; });
       const subtotal = p.precio * item.cantidad;
       total += subtotal;
@@ -149,3 +149,21 @@ if (cuerpoCarrito) {
       b.addEventListener("click", function () { quitarProducto(Number(b.dataset.id)); });
     });
   } 
+
+  function cambiarCantidad(id, cambio) {
+    const carrito = obtenerCarrito();
+    const item = carrito.find(function (i) { return i.id === id; });
+    item.cantidad += cambio;
+    if (item.cantidad <= 0) {
+      quitarProducto(id);
+      return;
+    }
+    guardarCarrito(carrito);
+    mostrarCarrito();
+  }
+
+  function quitarProducto(id) {
+    const carrito = obtenerCarrito().filter(function (i) { return i.id !== id; });
+    guardarCarrito(carrito);
+    mostrarCarrito();
+  }
