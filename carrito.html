@@ -35,3 +35,34 @@
       </div>
     </nav>
   </header>
+
+  <main class="container pagina">
+    <section>
+      <h1 class="titulo-seccion">Tu carrito</h1>
+
+      <div class="table-responsive">
+        <table class="table align-middle" id="tabla-carrito">
+          <thead>
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Subtotal</th>
+              <th scope="col"><span class="visually-hidden">Quitar</span></th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo-carrito"></tbody>
+        </table>
+      </div>
+
+      <p class="text-center d-none" id="carrito-vacio">Tu carrito está vacío. <a href="catalogo.html">Ir al catálogo</a></p>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 mt-3" id="resumen-carrito">
+        <button class="btn btn-outline-dark" id="btn-vaciar">Vaciar carrito</button>
+        <div class="text-center text-sm-end">
+          <p class="fs-4 mb-2">Total: <strong id="total-carrito">$0</strong></p>
+          <button class="btn btn-naranja btn-lg" id="btn-comprar">Finalizar compra</button>
+        </div>
+      </div>
+    </section>
+  </main>
