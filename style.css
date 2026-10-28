@@ -60,4 +60,47 @@ h1, h2, h3, .logo {
   padding: 24px;
   height: 100%;
 }
-.beneficio i { font-size: 2.5rem; color: var(--naranja); margin-bottom: 10px; }
+.beneficio i { font-size: 2.5rem; color: var(--naranja); margin-bottom: 10px; 
+
+}
+.producto {
+  border: none;
+
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+  height: 100%;
+}
+.producto:hover { transform: translateY(-5px); }
+.producto .foto {
+  background-color: var(--gris);
+  border-radius: 12px 12px 0 0;
+  padding: 20px;
+}
+
+.producto .precio { font-weight: 800; font-size: 1.25rem; 
+
+}
+.color-0 { filter: none; }
+.color-1 { filter: hue-rotate(200deg); }
+.color-2 { filter: hue-rotate(120deg); }
+.color-3 { filter: hue-rotate(300deg); }
+.color-4 { filter: grayscale(1); }
+
+
+.caja-info {
+  background-color: var(--negro);
+  color: var(--blanco);
+  padding: 24px;
+  border-radius: 12px;
+}
+.caja-info i { color: var(--naranja); width: 24px; }
+
+
+.redes a { color: var(--blanco); font-size: 1.5rem; margin-left: 12px; }
+.redes a:hover { color: var(--naranja); }
+
+
+@media (max-width: 576px) {
+  .hero h1 { font-size: 1.9rem; }
+}
